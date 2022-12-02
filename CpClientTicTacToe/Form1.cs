@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using CpMove;
 
 namespace CpClientTicTacToe
 {
@@ -15,6 +16,10 @@ namespace CpClientTicTacToe
         public Form1()
         {
             InitializeComponent();
+            
+            Move move1 = new Move();
+            Move move2 = new Move();
+
         }
 
     }
