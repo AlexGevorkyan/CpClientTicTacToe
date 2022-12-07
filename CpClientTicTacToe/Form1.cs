@@ -13,7 +13,7 @@ using System.Windows.Forms;
 
 namespace CpClientTicTacToe
 {
-    public partial class GameForm : Form
+    public partial class Form1 : Form
     {
         private List<Button> _buttonField;
         private int[] _field;
@@ -27,20 +27,8 @@ namespace CpClientTicTacToe
 
         public TcpClient client = null;
 
-        public GameForm()
+        public Form1()
         {
-            /*
-            while(!client.Connected)
-            {
-                using(LoginForm login = new LoginForm(this))
-                {
-                    if(login.ShowDialog() == DialogResult.OK)
-                    {
-
-                    }
-                }
-            }
-            */
 
             loginForm = new LoginForm(this);
             loginForm.ShowDialog();
