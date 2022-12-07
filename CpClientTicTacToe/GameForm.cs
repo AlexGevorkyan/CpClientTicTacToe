@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -12,7 +13,7 @@ using System.Windows.Forms;
 
 namespace CpClientTicTacToe
 {
-    public partial class Form1 : Form
+    public partial class GameForm : Form
     {
         private List<Button> _buttonField;
         private int[] _field;
@@ -21,10 +22,33 @@ namespace CpClientTicTacToe
         private int user=2;     //1 - X   2 - 0
 
         string path=string.Empty;
-        public Form1()
+
+        LoginForm loginForm = null;
+
+        public TcpClient client = null;
+
+        public GameForm()
         {
-            _field=new int[9];
-           // CreateField();
+            /*
+            while(!client.Connected)
+            {
+                using(LoginForm login = new LoginForm(this))
+                {
+                    if(login.ShowDialog() == DialogResult.OK)
+                    {
+
+                    }
+                }
+            }
+            */
+
+            loginForm = new LoginForm(this);
+            loginForm.ShowDialog();
+
+            InitializeComponent();
+
+            _field =new int[9];
+            CreateField();
             path=Directory.GetCurrentDirectory()+ "/Images";
             if (!Directory.Exists(path))
             {
@@ -32,7 +56,6 @@ namespace CpClientTicTacToe
             }
             this.Size=new Size(500,500);
             this.FormBorderStyle= FormBorderStyle.FixedDialog;
-
         }
 
         void CreateField()
