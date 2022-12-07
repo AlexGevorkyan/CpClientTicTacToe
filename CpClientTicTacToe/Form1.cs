@@ -1,20 +1,30 @@
-﻿using System;
+﻿using CpMove;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Sockets;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 
 namespace CpClientTicTacToe
 {
+    //How to sync turn?
+    // Is user X or O?
+
+
     public partial class Form1 : Form
     {
+        
         private List<Button> _buttonField;
         private int[] _field;
 
@@ -35,6 +45,7 @@ namespace CpClientTicTacToe
             InitializeComponent();
 
             _field =new int[9];
+
             CreateField();
             path=Directory.GetCurrentDirectory()+ "/Images";
             if (!Directory.Exists(path))
@@ -44,6 +55,61 @@ namespace CpClientTicTacToe
             this.Size=new Size(500,500);
             this.FormBorderStyle= FormBorderStyle.FixedDialog;
         }
+
+        #region ClientSocketWork
+        //Connect method
+        private void Connect()
+        {
+            IPEndPoint ep = new IPEndPoint(IPAddress.Parse(address), port);
+            _client.Connect(ep);
+            _ns = _client.GetStream();
+
+            Thread thread = new Thread(ReceiveResponse);
+            thread.IsBackground = true;
+            thread.Start();
+
+            // set username from textbox
+        }
+
+        // Get field from server
+        private void ReceiveResponse()
+        {
+            try
+            {
+                while (true)
+                {
+                    StreamReader reader = new StreamReader(_ns, Encoding.UTF8);
+                    Move move = (Move)_formatter.Deserialize(reader.BaseStream);
+
+                    FillField(move.Field);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Client/ReceiveResponse() : "+ex.Message+"\r\n" + ex.StackTrace);
+            }
+        }
+
+        //Send method (Call method after button click)
+        private void Send()
+        {
+            Move m = new Move{PlayerName = _username, Field = _field};
+            try
+            {
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    _formatter.Serialize(ms, m);
+                    _ns.Write(ms.ToArray(), 0, (int)ms.Length);
+                    _ns.Flush();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Client/Send() : "+ex.Message+"\r\n" + ex.StackTrace);
+            }
+        }
+        #endregion
+
 
         void CreateField()
         {
