@@ -33,25 +33,19 @@ namespace CpClientTicTacToe
 
         string path=string.Empty;
 
-         
-        private TcpClient _client;
-        private string _username;
-        private NetworkStream _ns;
-        BinaryFormatter _formatter = null;
+        LoginForm loginForm = null;
 
-        string address = "127.0.0.1";
-        int port=8888;
-
-
-
+        public TcpClient client = null;
 
         public Form1()
         {
-             _client = new TcpClient();
-            _formatter = new BinaryFormatter();
+            loginForm = new LoginForm(this);
+            loginForm.ShowDialog();
 
+            InitializeComponent();
 
-            _field=new int[9];
+            _field =new int[9];
+
             CreateField();
             path=Directory.GetCurrentDirectory()+ "/Images";
             if (!Directory.Exists(path))
@@ -60,7 +54,6 @@ namespace CpClientTicTacToe
             }
             this.Size=new Size(500,500);
             this.FormBorderStyle= FormBorderStyle.FixedDialog;
-
         }
 
         #region ClientSocketWork

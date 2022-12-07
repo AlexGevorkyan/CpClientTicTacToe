@@ -1,4 +1,4 @@
-﻿namespace CpClientTicTacToe
+namespace CpClientTicTacToe
 {
     partial class Form1
     {
@@ -32,10 +32,13 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(555, 470);
-            this.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+
+            this.ClientSize = new System.Drawing.Size(714, 658);
+            this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
+
             this.Name = "Form1";
             this.Text = "TicTacToe";
             this.ResumeLayout(false);
