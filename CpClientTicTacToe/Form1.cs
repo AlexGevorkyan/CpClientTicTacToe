@@ -29,7 +29,6 @@ namespace CpClientTicTacToe
 
         public Form1()
         {
-
             loginForm = new LoginForm(this);
             loginForm.ShowDialog();
 
