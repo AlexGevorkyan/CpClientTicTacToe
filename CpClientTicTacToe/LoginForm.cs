@@ -35,6 +35,11 @@ namespace CpClientTicTacToe
             //{
             //    _gameForm._client = new TcpClient(tbxIpAddress.Text, Int32.Parse(tbxPort.Text));
             //}
+
+            _gameForm.Connect();
+
+            this.DialogResult = DialogResult.OK;
+            this.Close();
         }
     }
 }

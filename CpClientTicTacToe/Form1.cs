@@ -64,7 +64,7 @@ namespace CpClientTicTacToe
 
         #region ClientSocketWork
         //Connect method
-        private void Connect()
+        public void Connect()
         {
             IPEndPoint ep = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 8888);
             _client.Connect(ep);
