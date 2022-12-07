@@ -15,9 +15,9 @@ namespace CpClientTicTacToe
         public string IpAddress { get; set; }
         public int Port { get; set; }
 
-        GameForm _gameForm = null;
+        Form1 _gameForm = null;
 
-        public LoginForm(GameForm gameForm)
+        public LoginForm(Form1 gameForm)
         {
             _gameForm = gameForm;
 
