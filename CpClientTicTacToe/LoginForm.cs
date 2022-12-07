@@ -31,10 +31,10 @@ namespace CpClientTicTacToe
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            while (!_gameForm.client.Connected && _gameForm.client == null)
-            {
-                _gameForm.client = new TcpClient(tbxIpAddress.Text, Int32.Parse(tbxPort.Text));
-            }
+            //while (!_gameForm._client.Connected && _gameForm._client == null)
+            //{
+            //    _gameForm._client = new TcpClient(tbxIpAddress.Text, Int32.Parse(tbxPort.Text));
+            //}
         }
     }
 }
