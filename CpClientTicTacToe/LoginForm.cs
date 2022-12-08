@@ -26,7 +26,7 @@ namespace CpClientTicTacToe
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            _gameForm.Close();
+            Application.Exit();
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
