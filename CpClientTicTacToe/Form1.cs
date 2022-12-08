@@ -45,7 +45,7 @@ namespace CpClientTicTacToe
         {
             InitializeComponent();
 
-            _field = new int[9];
+            _field = new int[10];
 
             _client = new TcpClient();
             _formatter = new BinaryFormatter();
@@ -156,6 +156,7 @@ namespace CpClientTicTacToe
                     if (user == 1)
                     {
                         _field[index] = user;
+                        
                         btn.Image = Image.FromFile("Images/Cross.png");
                         btn.Enabled = false;
                     }
@@ -165,7 +166,7 @@ namespace CpClientTicTacToe
                         btn.Image = Image.FromFile("Images/Circle.png");
                         btn.Enabled = false;
                     }
-
+                    _field[9] = index;
                     //_turn=false;
                     CheckWin();
                     Send();
