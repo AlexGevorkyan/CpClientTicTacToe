@@ -43,12 +43,15 @@ namespace CpClientTicTacToe
 
         public Form1()
         {
-            loginForm = new LoginForm(this);
-            loginForm.ShowDialog();
-
             InitializeComponent();
 
             _field = new int[9];
+
+            _client = new TcpClient();
+            _formatter = new BinaryFormatter();
+
+            loginForm = new LoginForm(this);
+            loginForm.ShowDialog();
 
             CreateField();
             path = Directory.GetCurrentDirectory() + "/Images";
@@ -59,7 +62,7 @@ namespace CpClientTicTacToe
             this.Size = new Size(500, 500);
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
 
-            _formatter = new BinaryFormatter();
+            
         }
 
         #region ClientSocketWork
@@ -87,8 +90,7 @@ namespace CpClientTicTacToe
                 {
                     StreamReader reader = new StreamReader(_ns, Encoding.UTF8);
                     Move move = (Move)_formatter.Deserialize(reader.BaseStream);
-
-                    FillField(move.Field);
+                    if(move != null) FillField(move.Field);
                 }
             }
             catch (Exception ex)
@@ -166,6 +168,7 @@ namespace CpClientTicTacToe
 
                     //_turn=false;
                     CheckWin();
+                    Send();
                 }
 
 

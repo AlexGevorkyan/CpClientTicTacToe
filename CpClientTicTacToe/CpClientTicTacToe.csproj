@@ -8,7 +8,7 @@
 
   <ItemGroup>
     <Reference Include="CpMove">
-      <HintPath>..\..\CpMove\CpMove\bin\Debug\CpMove.dll</HintPath>
+      <HintPath>bin\Debug\netcoreapp3.1\CpMove.dll</HintPath>
     </Reference>
   </ItemGroup>
 
