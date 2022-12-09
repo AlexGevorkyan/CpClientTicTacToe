@@ -49,9 +49,12 @@
             // 
             // tbxUserName
             // 
+            this.tbxUserName.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tbxUserName.Location = new System.Drawing.Point(106, 12);
             this.tbxUserName.Name = "tbxUserName";
-            this.tbxUserName.Size = new System.Drawing.Size(186, 29);
+            this.tbxUserName.Size = new System.Drawing.Size(190, 29);
             this.tbxUserName.TabIndex = 1;
             this.tbxUserName.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
@@ -66,9 +69,12 @@
             // 
             // tbxIpAddress
             // 
+            this.tbxIpAddress.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tbxIpAddress.Location = new System.Drawing.Point(106, 47);
             this.tbxIpAddress.Name = "tbxIpAddress";
-            this.tbxIpAddress.Size = new System.Drawing.Size(186, 29);
+            this.tbxIpAddress.Size = new System.Drawing.Size(190, 29);
             this.tbxIpAddress.TabIndex = 1;
             this.tbxIpAddress.Text = "127.0.01";
             this.tbxIpAddress.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -84,15 +90,19 @@
             // 
             // tbxPort
             // 
+            this.tbxPort.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tbxPort.Location = new System.Drawing.Point(106, 82);
             this.tbxPort.Name = "tbxPort";
-            this.tbxPort.Size = new System.Drawing.Size(186, 29);
+            this.tbxPort.Size = new System.Drawing.Size(190, 29);
             this.tbxPort.TabIndex = 1;
             this.tbxPort.Text = "8888";
             this.tbxPort.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // btnCancel
             // 
+            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Location = new System.Drawing.Point(181, 117);
             this.btnCancel.Name = "btnCancel";
@@ -104,6 +114,7 @@
             // 
             // btnLogin
             // 
+            this.btnLogin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnLogin.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnLogin.Location = new System.Drawing.Point(64, 117);
             this.btnLogin.Name = "btnLogin";
@@ -128,6 +139,7 @@
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.Margin = new System.Windows.Forms.Padding(4);
+            this.MinimumSize = new System.Drawing.Size(324, 203);
             this.Name = "LoginForm";
             this.Text = "LoginForm";
             this.ResumeLayout(false);

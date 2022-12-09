@@ -36,6 +36,8 @@ namespace CpClientTicTacToe
             //    _gameForm._client = new TcpClient(tbxIpAddress.Text, Int32.Parse(tbxPort.Text));
             //}
 
+            IpAddress=tbxIpAddress.Text.Trim();
+            Port=Convert.ToInt32(tbxPort.Text.Trim());
             _gameForm.Connect();
 
             this.DialogResult = DialogResult.OK;

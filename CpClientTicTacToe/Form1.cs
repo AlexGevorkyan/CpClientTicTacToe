@@ -29,7 +29,7 @@ namespace CpClientTicTacToe
         private int[] _field;
 
         private bool _turn = true;
-        private int user = 2;     //1 - X   2 - 0
+        //private int user = 2;     //1 - X   2 - 0
 
         string path = string.Empty;
 
@@ -62,14 +62,14 @@ namespace CpClientTicTacToe
             this.Size = new Size(500, 500);
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
 
-            
+
         }
 
         #region ClientSocketWork
         //Connect method
         public void Connect()
         {
-            IPEndPoint ep = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 8888);
+            IPEndPoint ep = new IPEndPoint(IPAddress.Parse(loginForm.IpAddress), loginForm.Port);
             _client.Connect(ep);
             _ns = _client.GetStream();
 
@@ -90,7 +90,8 @@ namespace CpClientTicTacToe
                 {
                     StreamReader reader = new StreamReader(_ns, Encoding.UTF8);
                     Move move = (Move)_formatter.Deserialize(reader.BaseStream);
-                    if(move != null) FillField(move.Field);
+                    if (move != null) 
+                        FillField(move.Field);
                 }
             }
             catch (Exception ex)
@@ -153,19 +154,19 @@ namespace CpClientTicTacToe
                 int index = _buttonField.IndexOf(btn);
                 if (_field[index] == 0)
                 {
-                    if (user == 1)
-                    {
-                        _field[index] = user;
-                        
-                        btn.Image = Image.FromFile("Images/Cross.png");
-                        btn.Enabled = false;
-                    }
-                    else if (user == 2)
-                    {
-                        _field[index] = user;
-                        btn.Image = Image.FromFile("Images/Circle.png");
-                        btn.Enabled = false;
-                    }
+                    //if (user == 1)
+                    //{
+                    //    _field[index] = user;
+
+                    //    btn.Image = Image.FromFile("Images/Cross.png");
+                    //    btn.Enabled = false;
+                    //}
+                    //else if (user == 2)
+                    //{
+                    //    _field[index] = user;
+                    //    btn.Image = Image.FromFile("Images/Circle.png");
+                    //    btn.Enabled = false;
+                    //}
                     _field[9] = index;
                     //_turn=false;
                     CheckWin();
@@ -219,7 +220,7 @@ namespace CpClientTicTacToe
         void FillField(int[] field)
         {
             _field = field;
-            for (int i = 0; i < _field.Length; i++)
+            for (int i = 0; i < _field.Length - 1; i++) // new Add -1
             {
                 if (_field[i] != 0)
                 {
