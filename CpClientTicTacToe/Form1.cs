@@ -133,7 +133,7 @@ namespace CpClientTicTacToe
                         Width = 100,
                         Height = 100,
                         Location = new Point(i * 105 + 5, j * 105 + 5),
-                        Image = Image.FromFile("Images/Empt.png")
+                        Image = loginForm.imgEmpty
                     };
                     tmp.Click += OnClick;
                     _buttonField.Add(tmp);
@@ -224,8 +224,8 @@ namespace CpClientTicTacToe
             {
                 if (_field[i] != 0)
                 {
-                    _buttonField[i].Image = (_field[i] == 1) ? Image.FromFile("Images/Cross.png") :
-                        Image.FromFile("Images/Circle.png");
+                    _buttonField[i].Image = (_field[i] == 1) ? loginForm.imgCross :
+                        loginForm.imgCircle;
                     _buttonField[i].Enabled = false;
                 }
             }
