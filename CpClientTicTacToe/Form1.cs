@@ -18,9 +18,6 @@ using System.Windows.Forms;
 
 namespace CpClientTicTacToe
 {
-    //How to sync turn?
-    // Is user X or O?
-
 
     public partial class Form1 : Form
     {
@@ -38,6 +35,7 @@ namespace CpClientTicTacToe
         private TcpClient _client = null;
         private NetworkStream _ns;
         private BinaryFormatter _formatter;
+        private static object locker = new object();
 
         private string _username;
 
@@ -46,6 +44,7 @@ namespace CpClientTicTacToe
             InitializeComponent();
 
             _field = new int[10];
+            _buttonField = new List<Button>();
 
             _client = new TcpClient();
             _formatter = new BinaryFormatter();
@@ -90,8 +89,31 @@ namespace CpClientTicTacToe
                 {
                     StreamReader reader = new StreamReader(_ns, Encoding.UTF8);
                     Move move = (Move)_formatter.Deserialize(reader.BaseStream);
-                    if (move != null) 
-                        FillField(move.Field);
+                    if (move != null)
+                    {
+                        lock (locker)
+                        {
+                            if (move.Field[9] == -1)
+                            {
+                                _turn = true;
+                                //MessageBox.Show("True");
+                            }
+                            else if (move.Field[9] == -2)
+                            {
+                                _turn = false;
+                                //MessageBox.Show("False");
+                            }
+                            else
+                            {
+                                _turn = !_turn;
+                                FillField(move.Field);
+                                CheckWin();
+                            }
+                        }
+
+
+                    }
+
                 }
             }
             catch (Exception ex)
@@ -146,35 +168,28 @@ namespace CpClientTicTacToe
 
         void OnClick(object s, EventArgs e)
         {
-            if (_turn == true)
+            lock (locker)
             {
-                Button btn = s as Button;
-                if (btn == null || btn.Text != string.Empty)
-                    return;
-                int index = _buttonField.IndexOf(btn);
-                if (_field[index] == 0)
+                if (_turn == true)
                 {
-                    //if (user == 1)
-                    //{
-                    //    _field[index] = user;
+                    Button btn = s as Button;
+                    if (btn == null || btn.Text != string.Empty)
+                        return;
+                    int index = _buttonField.IndexOf(btn);
+                    if (_field[index] == 0)
+                    {
 
-                    //    btn.Image = Image.FromFile("Images/Cross.png");
-                    //    btn.Enabled = false;
-                    //}
-                    //else if (user == 2)
-                    //{
-                    //    _field[index] = user;
-                    //    btn.Image = Image.FromFile("Images/Circle.png");
-                    //    btn.Enabled = false;
-                    //}
-                    _field[9] = index;
-                    //_turn=false;
-                    CheckWin();
-                    Send();
+                        //_turn = false;
+
+
+                        _field[9] = index;
+                        Send();
+                        
+                    }
                 }
-
-
             }
+
+
         }
 
 
